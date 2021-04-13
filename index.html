@@ -13,8 +13,17 @@
       <h2>Examples</h2>
       <ul>
         <li><a href="tweak/caret.html" target="_blank">Custom Caret Example</a></li>
+        <li>Floating Tools</li>
+        <li>Sharing Tools</li>
       </ul>
       <h2>Usage</h2>
+      <h4>Browser</h4>
+      <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
+&lt;script src="<a href="index.min.js" target="_blank">./text-editor.rect/index.min.js</a>"&gt;&lt;/script&gt;
+&lt;script&gt;
+TE.mirror = TE.Rect.mirror;
+TE.prototype.rect = TE.Rect.rect;
+&lt;/script&gt;</code></pre>
       <h4>CommonJS</h4>
       <pre><code>const TE = require('@taufik-nurrohman/text-editor');
 const {mirror, rect} = require('@taufik-nurrohman/text-editor.rect');
@@ -29,13 +38,23 @@ TE.mirror = mirror;
 TE.prototype.rect = rect;</code></pre>
       <h2>Methods and Properties</h2>
       <h3>TE.mirror</h3>
-      <p>Return a `
-      <div>` element to mirror the `<textarea>`.</p><h3>editor.rect(key)</h3><p>Get current selection offset and dimension data.</p><pre><code>// [&lt;selection start&gt;, &lt;selection end&gt;, &lt;selection as rectangle&gt;, &lt;the editor&gt;]
+      <p>Return a <code>&lt;div&gt;</code> element to mirror the <code>&lt;textarea&gt;</code>.</p>
+      <h3>editor.rect(key)</h3>
+      <p>Get current selection offset and dimension data.</p>
+      <pre><code>// [&lt;selection start&gt;, &lt;selection end&gt;, &lt;selection as rectangle&gt;, &lt;the editor&gt;]
 
 // x: left
 // y: top
 // w: width
-// h: height</code></pre></main><script src="../text-editor/index.min.js"></script><script src="index.min.js"></script><script>TE.mirror = TE.Rect.mirror;
-TE.prorotype.rect = TE.Rect.rect;
+// h: height</code></pre>
+    </main>
+    <script src="../text-editor/index.min.js"></script>
+    <script src="index.min.js"></script>
+    <script>
+      TE.mirror = TE.Rect.mirror;
+      TE.prototype.rect = TE.Rect.rect;
 
-const editor = new TE(document.querySelector('textarea'));</script></body></html>
+      const editor = new TE(document.querySelector('textarea'));
+    </script>
+  </body>
+</html>

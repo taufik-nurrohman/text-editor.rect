@@ -7,7 +7,7 @@ block state
 block script
   script
     | TE.mirror = TE.Rect.mirror;
-    | TE.prorotype.rect = TE.Rect.rect;
+    | TE.prototype.rect = TE.Rect.rect;
     |
     | const editor = new TE(document.querySelector('textarea'));
 
@@ -18,7 +18,17 @@ block content
     h2 Examples
     ul
       li: a(href='tweak/caret.html' target='_blank') Custom Caret Example
+      li Floating Tools
+      li Sharing Tools
     h2 Usage
+    h4 Browser
+    pre: code
+      | &lt;script src="#[a(href='../text-editor/index.min.js' target='_blank') ./text-editor/index.min.js]"&gt;&lt;/script&gt;
+      | &lt;script src="#[a(href='index.min.js' target='_blank') ./text-editor.rect/index.min.js]"&gt;&lt;/script&gt;
+      | &lt;script&gt;
+      | TE.mirror = TE.Rect.mirror;
+      | TE.prototype.rect = TE.Rect.rect;
+      | &lt;/script&gt;
     h4 CommonJS
     pre: code
       | const TE = require('@taufik-nurrohman/text-editor');
@@ -35,7 +45,7 @@ block content
       | TE.prototype.rect = rect;
     h2 Methods and Properties
     h3 TE.mirror
-    p Return a `<div>` element to mirror the `<textarea>`.
+    p Return a #[code &lt;div&gt;] element to mirror the #[code &lt;textarea&gt;].
     h3 editor.rect(key)
     p Get current selection offset and dimension data.
     pre: code
