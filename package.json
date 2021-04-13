@@ -1,0 +1,51 @@
+{
+  "author": "Taufik Nurrohman",
+  "browser": "index.min.js",
+  "bugs": "https://github.com/taufik-nurrohman/text-editor.rect/issues",
+  "description": "Rect extension for text editor.",
+  "devDependencies": {
+    "@taufik-nurrohman/document": "^0.1.5",
+    "@taufik-nurrohman/factory": "^0.1.10",
+    "@taufik-nurrohman/from": "^0.0.5",
+    "@taufik-nurrohman/is": "^0.1.0",
+    "@taufik-nurrohman/rect": "^0.0.5",
+    "@taufik-nurrohman/to": "^0.0.16"
+  },
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "index.min.js",
+    "index.mjs"
+  ],
+  "funding": {
+    "url": "https://paypal.me/tatautaufik"
+  },
+  "homepage": "https://taufik-nurrohman.js.org/text-editor.rect",
+  "keywords": [
+    "axis",
+    "editor",
+    "extension",
+    "offset",
+    "range",
+    "rect",
+    "selection",
+    "size",
+    "text"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "name": "@taufik-nurrohman/text-editor.rect",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taufik-nurrohman/text-editor.rect.git"
+  },
+  "scripts": {
+    "pack": "pack --clean=false --from=.github/source --js-format=umd --js-name=TE.Rect --js-top='%(js.license)' --mjs=true --to=."
+  },
+  "type": "module",
+  "version": "2.0.0"
+}
