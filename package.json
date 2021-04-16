@@ -2,6 +2,9 @@
   "author": "Taufik Nurrohman",
   "browser": "index.min.js",
   "bugs": "https://github.com/taufik-nurrohman/text-editor.rect/issues",
+  "dependencies": {
+    "@taufik-nurrohman/text-editor": "^3.2.5"
+  },
   "description": "Rect extension for text editor.",
   "devDependencies": {
     "@taufik-nurrohman/document": "^0.1.5",

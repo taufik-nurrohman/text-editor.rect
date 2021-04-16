@@ -1,0 +1,89 @@
+extends ../_index.pug
+
+block state
+  - const title = 'Tools \xB7 Text Editor Rect ' + version
+  - const scripts = ['../../text-editor/index.min.js', '../index.min.js']
+
+block script
+  script
+    | TE.mirror = TE.Rect.mirror;
+    | TE.prototype.rect = TE.Rect.rect;
+    |
+    | const editor = new TE(document.querySelector('textarea'));
+    | const blocks = document.querySelector('.tools-block');
+    | const spans = document.querySelector('.tools-span');
+    |
+    | function hideTools() {
+    |     blocks.style.display = "";
+    |     spans.style.display = "";
+    | }
+    |
+    | function showTools() {
+    |     hideTools();
+    |     setTimeout(() => {
+    |         let {after, before, value} = editor.$();
+    |         if (value) {
+    |             let rect = editor.rect();
+    |             spans.style.display = 'block';
+    |             spans.style.left = (rect[0].x - this.scrollLeft) + 'px';
+    |             spans.style.top = (rect[0].y - this.scrollTop) + 'px';
+    |         } else if (!value && (
+    |             '\n' === before.slice(-1) ||
+    |             '\n' === after.slice(0, 1)
+    |         ) || null === editor.get()) {
+    |             let rect = editor.rect();
+    |             blocks.style.display = 'block';
+    |             blocks.style.left = (rect[0].x - this.scrollLeft) + 'px';
+    |             blocks.style.top = (rect[0].y - this.scrollTop) + 'px';
+    |         }
+    |     }, 1);
+    | }
+    |
+    | editor.self.addEventListener('keydown', showTools, false);
+    | editor.self.addEventListener('mouseup', showTools, false);
+    | editor.self.addEventListener('touchend', showTools, false);
+    |
+    | blocks.addEventListener('click', hideTools, false);
+    | spans.addEventListener('click', hideTools, false);
+
+block style
+  style
+    | .tools-block,
+    | .tools-span {
+    |   display: none;
+    |   position: absolute;
+    |   top: 0;
+    |   left: 0;
+    |   background: #fff;
+    |   border: 1px solid;
+    |   padding: .25em;
+    |   box-shadow: 0 5px 8px -2px rgba(0, 0, 0, .5);
+    | }
+
+block content
+  main
+    p.tools-block
+      button(onclick='editor.trim(\'\\n\\n\', \'\').insert(\'---\\n\\n\', -1, true);'): span!= '➖'
+      = ' '
+      button(onclick='let v=prompt(\'Image URL:\',\'http://\'); v && editor.trim(\'\\n\\n\').insert(\'![1](\' + v + \')\\n\\n\', -1, true);'): span!= '🖼'
+    p.tools-span
+      button(onclick='editor.wrap(\'**\', \'**\')'): b B
+      = ' '
+      button(onclick='editor.wrap(\'_\', \'_\')'): i I
+    p: textarea(cols='100' rows='20' spellcheck='false' style={
+      'line-height': '1.25em'
+    })
+      | The MIT License (MIT)
+      |
+      | Copyright © %(year) Taufik Nurrohman
+      |
+      | Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+      |
+      | The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+      |
+      | THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+      |
+      | a
+      | b
+      | c
+      | d

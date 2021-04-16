@@ -1,7 +1,7 @@
 extends _index.pug
 
 block state
-  - const title = 'Rect \xB7 Text Editor'
+  - const title = 'Text Editor Rect ' + version
   - const scripts = ['../text-editor/index.min.js', 'index.min.js']
 
 block script
@@ -11,15 +11,63 @@ block script
     |
     | const editor = new TE(document.querySelector('textarea'));
 
+block style
+  style
+    | * {
+    |   box-sizing: border-box;
+    | }
+    | :root {
+    |   background: #fff;
+    |   color: #000;
+    |   border-top: 4px solid;
+    |   font: normal normal 16px/1.25 serif;
+    | }
+    | a {
+    |   color: #009;
+    |   text-decoration: none;
+    | }
+    | a, code {
+    |   word-wrap: break-word;
+    | }
+    | code {
+    |   font-family: monospace;
+    |   font-size: 80%;
+    | }
+    | footer, header, main, nav {
+    |   max-width: 700px;
+    |   margin: 0 auto;
+    | }
+    | hr {
+    |   border: 0;
+    |   color: inherit;
+    |   border-top: 1px dashed;
+    |   height: 0;
+    | }
+    | pre {
+    |   white-space: pre-wrap;
+    |   word-wrap: break-word;
+    | }
+    | pre code {
+    |   display: block;
+    |   background: #eee;
+    |   padding: 1em;
+    | }
+    | table {
+    |   width: 100%;
+    | }
+    | td, th {
+    |   text-align: left;
+    |   vertical-align: top;
+    | }
+
 block content
+  header
+    h1= title
+    p Rect extension for #[a(href='../text-editor/index.html') text editor].
+    hr
   main
     p: textarea(spellcheck='false') abcdef
     p: button(onclick='alert(JSON.stringify(editor.rect(), null, 2));') Inspect
-    h2 Examples
-    ul
-      li: a(href='tweak/caret.html' target='_blank') Custom Caret Example
-      li Floating Tools
-      li Sharing Tools
     h2 Usage
     h4 Browser
     pre: code
@@ -43,6 +91,10 @@ block content
       |
       | TE.mirror = mirror;
       | TE.prototype.rect = rect;
+    h2 Examples
+    ul
+      li: a(href='tweak/caret.html' target='_blank') Custom Caret Example
+      li: a(href='tweak/tools.html' target='_blank') Floating Tools Example
     h2 Methods and Properties
     h3 TE.mirror
     p Return a #[code &lt;div&gt;] element to mirror the #[code &lt;textarea&gt;].
@@ -55,3 +107,8 @@ block content
       | // y: top
       | // w: width
       | // h: height
+  footer
+    hr
+    p
+      != '&copy; ' + year + ' '
+      a(href='/') Taufik Nurrohman

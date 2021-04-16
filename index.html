@@ -4,18 +4,70 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <meta content="Rect extension for text editor." name="description">
-    <title>Rect · Text Editor</title>
+    <title>Text Editor Rect 2.0.0</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        background: #fff;
+        color: #000;
+        border-top: 4px solid;
+        font: normal normal 16px/1.25 serif;
+      }
+      a {
+        color: #009;
+        text-decoration: none;
+      }
+      a,
+      code {
+        word-wrap: break-word;
+      }
+      code {
+        font-family: monospace;
+        font-size: 80%;
+      }
+      footer,
+      header,
+      main,
+      nav {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      hr {
+        border: 0;
+        color: inherit;
+        border-top: 1px dashed;
+        height: 0;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      pre code {
+        display: block;
+        background: #eee;
+        padding: 1em;
+      }
+      table {
+        width: 100%;
+      }
+      td,
+      th {
+        text-align: left;
+        vertical-align: top;
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <h1>Text Editor Rect 2.0.0</h1>
+      <p>Rect extension for <a href="../text-editor/index.html">text editor</a>.</p>
+      <hr>
+    </header>
     <main>
       <p><textarea spellcheck="false">abcdef</textarea></p>
       <p><button onclick="alert(JSON.stringify(editor.rect(), null, 2));">Inspect</button></p>
-      <h2>Examples</h2>
-      <ul>
-        <li><a href="tweak/caret.html" target="_blank">Custom Caret Example</a></li>
-        <li>Floating Tools</li>
-        <li>Sharing Tools</li>
-      </ul>
       <h2>Usage</h2>
       <h4>Browser</h4>
       <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
@@ -36,6 +88,11 @@ import {mirror, rect} from '@taufik-nurrohman/text-editor.rect';
 
 TE.mirror = mirror;
 TE.prototype.rect = rect;</code></pre>
+      <h2>Examples</h2>
+      <ul>
+        <li><a href="tweak/caret.html" target="_blank">Custom Caret Example</a></li>
+        <li><a href="tweak/tools.html" target="_blank">Floating Tools Example</a></li>
+      </ul>
       <h2>Methods and Properties</h2>
       <h3>TE.mirror</h3>
       <p>Return a <code>&lt;div&gt;</code> element to mirror the <code>&lt;textarea&gt;</code>.</p>
@@ -48,6 +105,10 @@ TE.prototype.rect = rect;</code></pre>
 // w: width
 // h: height</code></pre>
     </main>
+    <footer>
+      <hr>
+      <p>&copy; 2021 <a href="/">Taufik Nurrohman</a></p>
+    </footer>
     <script src="../text-editor/index.min.js"></script>
     <script src="index.min.js"></script>
     <script>
