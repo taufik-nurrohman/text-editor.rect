@@ -6,16 +6,15 @@ block state
 
 block script
   script
-    | TE.mirror = TE.Rect.mirror;
-    | TE.prototype.rect = TE.Rect.rect;
+    | Object.assign(TE.prototype, TE.Rect.that);
     |
     | const editor = new TE(document.querySelector('textarea'));
     | const blocks = document.querySelector('.tools-block');
-    | const spans = document.querySelector('.tools-span');
+    | const lines = document.querySelector('.tools-line');
     |
     | function hideTools() {
     |     blocks.style.display = "";
-    |     spans.style.display = "";
+    |     lines.style.display = "";
     | }
     |
     | function showTools() {
@@ -24,9 +23,9 @@ block script
     |         let {after, before, value} = editor.$();
     |         if (value) {
     |             let rect = editor.rect();
-    |             spans.style.display = 'block';
-    |             spans.style.left = (rect[0].x - this.scrollLeft) + 'px';
-    |             spans.style.top = (rect[0].y - this.scrollTop) + 'px';
+    |             lines.style.display = 'block';
+    |             lines.style.left = (rect[0].x - this.scrollLeft) + 'px';
+    |             lines.style.top = (rect[0].y - this.scrollTop) + 'px';
     |         } else if (!value && (
     |             '\n' === before.slice(-1) ||
     |             '\n' === after.slice(0, 1)
@@ -44,12 +43,12 @@ block script
     | editor.self.addEventListener('touchend', showTools, false);
     |
     | blocks.addEventListener('click', hideTools, false);
-    | spans.addEventListener('click', hideTools, false);
+    | lines.addEventListener('click', hideTools, false);
 
 block style
   style
     | .tools-block,
-    | .tools-span {
+    | .tools-line {
     |   display: none;
     |   position: absolute;
     |   top: 0;
@@ -66,7 +65,7 @@ block content
       button(onclick='editor.trim(\'\\n\\n\', \'\').insert(\'---\\n\\n\', -1, true);'): span!= '➖'
       = ' '
       button(onclick='let v=prompt(\'Image URL:\',\'http://\'); v && editor.trim(\'\\n\\n\').insert(\'![1](\' + v + \')\\n\\n\', -1, true);'): span!= '🖼'
-    p.tools-span
+    p.tools-line
       button(onclick='editor.wrap(\'**\', \'**\')'): b B
       = ' '
       button(onclick='editor.wrap(\'_\', \'_\')'): i I

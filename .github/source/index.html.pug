@@ -6,8 +6,7 @@ block state
 
 block script
   script
-    | TE.mirror = TE.Rect.mirror;
-    | TE.prototype.rect = TE.Rect.rect;
+    | Object.assign(TE.prototype, TE.Rect.that);
     |
     | const editor = new TE(document.querySelector('textarea'));
 
@@ -65,6 +64,7 @@ block content
     h1= title
     p Rect extension for #[a(href='../text-editor/index.html') text editor].
     hr
+    p Provides a feature to get cursor position and selection dimension in pixels.
   main
     p: textarea(spellcheck='false') abcdef
     p: button(onclick='alert(JSON.stringify(editor.rect(), null, 2));') Inspect
@@ -74,39 +74,36 @@ block content
       | &lt;script src="#[a(href='../text-editor/index.min.js' target='_blank') ./text-editor/index.min.js]"&gt;&lt;/script&gt;
       | &lt;script src="#[a(href='index.min.js' target='_blank') ./text-editor.rect/index.min.js]"&gt;&lt;/script&gt;
       | &lt;script&gt;
-      | TE.mirror = TE.Rect.mirror;
-      | TE.prototype.rect = TE.Rect.rect;
+      | Object.assign(TE.prototype, TE.Rect.that);
       | &lt;/script&gt;
     h4 CommonJS
     pre: code
       | const TE = require('@taufik-nurrohman/text-editor');
-      | const {mirror, rect} = require('@taufik-nurrohman/text-editor.rect');
+      | const {that} = require('@taufik-nurrohman/text-editor.rect');
       |
-      | TE.mirror = mirror;
-      | TE.prototype.rect = rect;
+      | Object.assign(TE.prototype, that);
     h4 ECMAScript
     pre: code
       | import TE from '@taufik-nurrohman/text-editor';
-      | import {mirror, rect} from '@taufik-nurrohman/text-editor.rect';
+      | import {that} from '@taufik-nurrohman/text-editor.rect';
       |
-      | TE.mirror = mirror;
-      | TE.prototype.rect = rect;
+      | Object.assign(TE.prototype, that);
     h2 Examples
     ul
       li: a(href='tweak/caret.html' target='_blank') Custom Caret Example
       li: a(href='tweak/tools.html' target='_blank') Floating Tools Example
     h2 Methods and Properties
-    h3 TE.mirror
-    p Return a #[code &lt;div&gt;] element to mirror the #[code &lt;textarea&gt;].
+    h3 editor.mirror
+    p Return a #[code &lt;div&gt;] element that mirrors the #[code &lt;textarea&gt;] element.
     h3 editor.rect(key)
     p Get current selection offset and dimension data.
     pre: code
       | // [&lt;selection start&gt;, &lt;selection end&gt;, &lt;selection as rectangle&gt;, &lt;the editor&gt;]
       |
+      | // h: height
+      | // w: width
       | // x: left
       | // y: top
-      | // w: width
-      | // h: height
   footer
     hr
     p

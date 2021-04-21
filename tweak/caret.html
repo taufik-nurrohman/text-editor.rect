@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
-    <meta content="Rect extension for text editor." name="description">
-    <title>Caret · Text Editor Rect 2.0.0</title>
+    <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
+    <title>Caret · Text Editor Rect 2.1.0</title>
   </head>
   <body>
     <main>
@@ -22,15 +22,14 @@ a
 b
 c
 d</textarea></p>
-      <p><label><input type="checkbox"> <span>Toggle mirror visibility?</span></label></p>
+      <p><label><input type="checkbox"> <span>Show Mirror</span></label></p>
     </main>
     <script src="../../text-editor/index.min.js"></script>
     <script src="../index.min.js"></script>
     <script>
-      TE.mirror = TE.Rect.mirror;
-      TE.prototype.rect = TE.Rect.rect;
+      Object.assign(TE.prototype, TE.Rect.that);
 
-      let check = document.querySelector('input[type="checkbox"]'),
+      let checkBox = document.querySelector('input[type="checkbox"]'),
           caret = [
               document.createElement('span'),
               document.createElement('span')
@@ -39,6 +38,12 @@ d</textarea></p>
       document.body.appendChild(caret[1]);
 
       function run(el) {
+          function toggleMirror() {
+              if (editor.mirror) {
+                  editor.mirror.style.pointerEvents = 'none';
+                  editor.mirror.style.visibility = this.checked ? 'visible' : 'hidden';
+              }
+          }
           const editor = new TE(el);
           let s = 'position:absolute;width:2px;z-index:9999;visibility:hidden;pointer-events:none;margin-left:-1px;';
           caret[0].style.cssText = s + 'background:red;';
@@ -58,9 +63,9 @@ d</textarea></p>
               caret[1].style.left = (rect[1].x - e.scrollLeft) + 'px';
               caret[1].style.height = h + 'px';
               caret[1].style.marginTop = '-' + ((h - rect[1].h) / 2) + 'px';
-              toggleMirrorVisibility.call(check);
+              toggleMirror.call(checkBox);
           }
-          check.onchange = toggleMirrorVisibility;
+          checkBox.onchange = toggleMirror;
           editor.self.onfocus = () => {
               caret[0].style.visibility = 'visible';
               caret[1].style.visibility = 'visible';
@@ -76,11 +81,6 @@ d</textarea></p>
               }, false);
           });
           editor.self.addEventListener('mousemove', setCaretPosition, false);
-      }
-
-      function toggleMirrorVisibility(el) {
-          TE.mirror.style.pointerEvents = 'none';
-          TE.mirror.style.visibility = this.checked ? 'visible' : 'hidden';
       }
 
       run(document.querySelector('textarea'));

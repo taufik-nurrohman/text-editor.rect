@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
-    <meta content="Rect extension for text editor." name="description">
-    <title>Tools · Text Editor Rect 2.0.0</title>
+    <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
+    <title>Tools · Text Editor Rect 2.1.0</title>
     <style>
       .tools-block,
-      .tools-span {
+      .tools-line {
         display: none;
         position: absolute;
         top: 0;
@@ -22,7 +22,7 @@
   <body>
     <main>
       <p class="tools-block"><button onclick="editor.trim('\n\n', '').insert('---\n\n', -1, true);"><span>➖</span></button> <button onclick="let v=prompt('Image URL:','http://'); v &amp;&amp; editor.trim('\n\n').insert('![1](' + v + ')\n\n', -1, true);"><span>🖼</span></button></p>
-      <p class="tools-span"><button onclick="editor.wrap('**', '**')"><b>B</b></button> <button onclick="editor.wrap('_', '_')"><i>I</i></button></p>
+      <p class="tools-line"><button onclick="editor.wrap('**', '**')"><b>B</b></button> <button onclick="editor.wrap('_', '_')"><i>I</i></button></p>
       <p><textarea cols="100" rows="20" spellcheck="false" style="line-height:1.25em;">The MIT License (MIT)
 
 Copyright © 2021 Taufik Nurrohman
@@ -41,16 +41,15 @@ d</textarea></p>
     <script src="../../text-editor/index.min.js"></script>
     <script src="../index.min.js"></script>
     <script>
-      TE.mirror = TE.Rect.mirror;
-      TE.prototype.rect = TE.Rect.rect;
+      Object.assign(TE.prototype, TE.Rect.that);
 
       const editor = new TE(document.querySelector('textarea'));
       const blocks = document.querySelector('.tools-block');
-      const spans = document.querySelector('.tools-span');
+      const lines = document.querySelector('.tools-line');
 
       function hideTools() {
           blocks.style.display = "";
-          spans.style.display = "";
+          lines.style.display = "";
       }
 
       function showTools() {
@@ -63,9 +62,9 @@ d</textarea></p>
               } = editor.$();
               if (value) {
                   let rect = editor.rect();
-                  spans.style.display = 'block';
-                  spans.style.left = (rect[0].x - this.scrollLeft) + 'px';
-                  spans.style.top = (rect[0].y - this.scrollTop) + 'px';
+                  lines.style.display = 'block';
+                  lines.style.left = (rect[0].x - this.scrollLeft) + 'px';
+                  lines.style.top = (rect[0].y - this.scrollTop) + 'px';
               } else if (!value && (
                       '\n' === before.slice(-1) ||
                       '\n' === after.slice(0, 1)
@@ -83,7 +82,7 @@ d</textarea></p>
       editor.self.addEventListener('touchend', showTools, false);
 
       blocks.addEventListener('click', hideTools, false);
-      spans.addEventListener('click', hideTools, false);
+      lines.addEventListener('click', hideTools, false);
     </script>
   </body>
 </html>

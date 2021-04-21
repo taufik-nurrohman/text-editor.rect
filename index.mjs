@@ -98,9 +98,22 @@ function getRectSelection($, div, source) {
     }];
 }
 
-export const mirror = setElement('div');
-export const rect = function(key) {
-    let t = this,
-        rect = getRectSelection(t.$(), mirror, t.self);
-    return isSet(key) ? [rect[0][key], rect[1][key]] : rect;
+const that = {
+    mirror: null
 };
+
+that.rect = function(key) {
+    let t = this;
+    if (!t.mirror) {
+        t.mirror = setElement('div');
+    }
+    let rect = getRectSelection(t.$(), t.mirror, t.self);
+    return isSet(key) ? [
+        rect[0][key],
+        rect[1][key],
+        rect[2][key],
+        rect[3][key]
+    ] : rect;
+};
+
+export default {that};

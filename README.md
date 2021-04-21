@@ -3,11 +3,4 @@ Text Editor Rect
 
 > Rect extension for [text editor](https://github.com/taufik-nurrohman/text-editor).
 
----
-
-Release Notes
--------------
-
-### 2.0.0
-
- - Moved extensions from the main repository.
+Provides a feature to get cursor position and selection dimension in pixels.

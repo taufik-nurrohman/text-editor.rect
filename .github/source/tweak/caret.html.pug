@@ -6,10 +6,9 @@ block state
 
 block script
   script
-    | TE.mirror = TE.Rect.mirror;
-    | TE.prototype.rect = TE.Rect.rect;
+    | Object.assign(TE.prototype, TE.Rect.that);
     |
-    | let check = document.querySelector('input[type="checkbox"]'),
+    | let checkBox = document.querySelector('input[type="checkbox"]'),
     |     caret = [
     |         document.createElement('span'),
     |         document.createElement('span')
@@ -18,6 +17,12 @@ block script
     | document.body.appendChild(caret[1]);
     |
     | function run(el) {
+    |     function toggleMirror() {
+    |         if (editor.mirror) {
+    |             editor.mirror.style.pointerEvents = 'none';
+    |             editor.mirror.style.visibility = this.checked ? 'visible' : 'hidden';
+    |         }
+    |     }
     |     const editor = new TE(el);
     |     let s = 'position:absolute;width:2px;z-index:9999;visibility:hidden;pointer-events:none;margin-left:-1px;';
     |     caret[0].style.cssText = s + 'background:red;';
@@ -36,9 +41,9 @@ block script
     |         caret[1].style.left = (rect[1].x - e.scrollLeft) + 'px';
     |         caret[1].style.height = h + 'px';
     |         caret[1].style.marginTop = '-' + ((h - rect[1].h) / 2) + 'px';
-    |         toggleMirrorVisibility.call(check);
+    |         toggleMirror.call(checkBox);
     |     }
-    |     check.onchange = toggleMirrorVisibility;
+    |     checkBox.onchange = toggleMirror;
     |     editor.self.onfocus = () => {
     |         caret[0].style.visibility = 'visible';
     |         caret[1].style.visibility = 'visible';
@@ -54,11 +59,6 @@ block script
     |         }, false);
     |     });
     |     editor.self.addEventListener('mousemove', setCaretPosition, false);
-    | }
-    |
-    | function toggleMirrorVisibility(el) {
-    |     TE.mirror.style.pointerEvents = 'none';
-    |     TE.mirror.style.visibility = this.checked ? 'visible' : 'hidden';
     | }
     |
     | run(document.querySelector('textarea'));
@@ -85,4 +85,4 @@ block content
     p: label
       input(type='checkbox')
       = ' '
-      span Toggle mirror visibility?
+      span Show Mirror
