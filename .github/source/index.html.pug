@@ -79,15 +79,15 @@ block content
     h4 CommonJS
     pre: code
       | const TE = require('@taufik-nurrohman/text-editor');
-      | const {that} = require('@taufik-nurrohman/text-editor.rect');
+      | const {that: thatRect} = require('@taufik-nurrohman/text-editor.rect');
       |
-      | Object.assign(TE.prototype, that);
+      | Object.assign(TE.prototype, thatRect);
     h4 ECMAScript
     pre: code
       | import TE from '@taufik-nurrohman/text-editor';
-      | import {that} from '@taufik-nurrohman/text-editor.rect';
+      | import {that: thatRect} from '@taufik-nurrohman/text-editor.rect';
       |
-      | Object.assign(TE.prototype, that);
+      | Object.assign(TE.prototype, thatRect);
     h2 Examples
     ul
       li: a(href='tweak/caret.html' target='_blank') Custom Caret Example

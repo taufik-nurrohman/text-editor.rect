@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
-    <title>Text Editor Rect 2.1.0</title>
+    <title>Text Editor Rect 2.1.1</title>
     <style>
       * {
         box-sizing: border-box;
@@ -61,7 +61,7 @@
   </head>
   <body>
     <header>
-      <h1>Text Editor Rect 2.1.0</h1>
+      <h1>Text Editor Rect 2.1.1</h1>
       <p>Rect extension for <a href="../text-editor/index.html">text editor</a>.</p>
       <hr>
       <p>Provides a feature to get cursor position and selection dimension in pixels.</p>
@@ -78,14 +78,14 @@ Object.assign(TE.prototype, TE.Rect.that);
 &lt;/script&gt;</code></pre>
       <h4>CommonJS</h4>
       <pre><code>const TE = require('@taufik-nurrohman/text-editor');
-const {that} = require('@taufik-nurrohman/text-editor.rect');
+const {that: thatRect} = require('@taufik-nurrohman/text-editor.rect');
 
-Object.assign(TE.prototype, that);</code></pre>
+Object.assign(TE.prototype, thatRect);</code></pre>
       <h4>ECMAScript</h4>
       <pre><code>import TE from '@taufik-nurrohman/text-editor';
-import {that} from '@taufik-nurrohman/text-editor.rect';
+import {that: thatRect} from '@taufik-nurrohman/text-editor.rect';
 
-Object.assign(TE.prototype, that);</code></pre>
+Object.assign(TE.prototype, thatRect);</code></pre>
       <h2>Examples</h2>
       <ul>
         <li><a href="tweak/caret.html" target="_blank">Custom Caret Example</a></li>
