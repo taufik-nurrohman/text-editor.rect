@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
-    <title>Tools · Text Editor Rect 2.1.0</title>
+    <title>Tools · Text Editor Rect 2.1.1</title>
     <style>
       .tools-block,
       .tools-line {
@@ -66,8 +66,9 @@ d</textarea></p>
                   lines.style.left = (rect[0].x - this.scrollLeft) + 'px';
                   lines.style.top = (rect[0].y - this.scrollTop) + 'px';
               } else if (!value && (
-                      '\n' === before.slice(-1) ||
-                      '\n' === after.slice(0, 1)
+                      !after ||
+                      !before ||
+                      '\n' === after.slice(0, 1) && '\n' === before.slice(-1)
                   ) || null === editor.get()) {
                   let rect = editor.rect();
                   blocks.style.display = 'block';
