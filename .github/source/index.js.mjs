@@ -98,7 +98,7 @@ function getRectSelection($, div, source) {
     }];
 }
 
-const that = {
+export const that = {
     mirror: null
 };
 
@@ -115,5 +115,3 @@ that.rect = function(key) {
         rect[3][key]
     ] : rect;
 };
-
-export default {that};

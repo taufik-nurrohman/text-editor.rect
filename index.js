@@ -26,8 +26,8 @@
  *
  */
 (function(global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.TE = global.TE || {}, global.TE.Rect = factory()));
-})(this, function() {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.TE = global.TE || {}, global.TE.Rect = {})));
+})(this, function(exports) {
     'use strict';
     var isArray = function isArray(x) {
         return Array.isArray(x);
@@ -311,8 +311,5 @@
         let rect = getRectSelection(t.$(), t.mirror, t.self);
         return isSet(key) ? [rect[0][key], rect[1][key], rect[2][key], rect[3][key]] : rect;
     };
-    var _virtual_entry = {
-        that
-    };
-    return _virtual_entry;
+    exports.that = that;
 });
