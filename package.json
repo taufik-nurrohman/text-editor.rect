@@ -4,10 +4,10 @@
   "bugs": "https://github.com/taufik-nurrohman/text-editor.rect/issues",
   "dependencies": {
     "@taufik-nurrohman/document": "^0.1.8",
-    "@taufik-nurrohman/from": "^0.0.7",
+    "@taufik-nurrohman/from": "^0.0.8",
     "@taufik-nurrohman/is": "^0.1.2",
     "@taufik-nurrohman/rect": "^0.0.8",
-    "@taufik-nurrohman/text-editor": "^3.3.4",
+    "@taufik-nurrohman/text-editor": "^3.3.5",
     "@taufik-nurrohman/to": "^0.0.18"
   },
   "description": "Provides a feature to get cursor position and selection dimension in pixels.",
@@ -50,5 +50,5 @@
     "pack": "pack --clean=false --from=.github/source --js-format=umd --js-name=TE.Rect --js-top='%(js.license)' --mjs=true --to=."
   },
   "type": "module",
-  "version": "2.1.5"
+  "version": "2.1.6"
 }

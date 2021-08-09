@@ -60,9 +60,6 @@
     var isString = function isString(x) {
         return 'string' === typeof x;
     };
-    var fromHTML = function fromHTML(x) {
-        return x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
-    };
     var fromValue = function fromValue(x) {
         if (isArray(x)) {
             return x.map(function(v) {
@@ -217,6 +214,9 @@
             }
         }
         return node;
+    };
+    var fromHTML = function fromHTML(x) {
+        return x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
     };
     var getOffset = function getOffset(node) {
         return [node.offsetLeft, node.offsetTop];
