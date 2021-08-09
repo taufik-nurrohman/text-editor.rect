@@ -60,29 +60,6 @@
     var isString = function isString(x) {
         return 'string' === typeof x;
     };
-    var fromValue = function fromValue(x) {
-        if (isArray(x)) {
-            return x.map(function(v) {
-                return fromValue(x);
-            });
-        }
-        if (isObject(x)) {
-            for (var k in x) {
-                x[k] = fromValue(x[k]);
-            }
-            return x;
-        }
-        if (false === x) {
-            return 'false';
-        }
-        if (null === x) {
-            return 'null';
-        }
-        if (true === x) {
-            return 'true';
-        }
-        return "" + x;
-    };
     var toCaseCamel = function toCaseCamel(x) {
         return x.replace(/[-_.](\w)/g, function(m0, m1) {
             return toCaseUpper(m1);
@@ -122,6 +99,32 @@
             return true;
         }
         return x;
+    };
+    var fromHTML = function fromHTML(x) {
+        return x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
+    };
+    var fromValue = function fromValue(x) {
+        if (isArray(x)) {
+            return x.map(function(v) {
+                return fromValue(x);
+            });
+        }
+        if (isObject(x)) {
+            for (var k in x) {
+                x[k] = fromValue(x[k]);
+            }
+            return x;
+        }
+        if (false === x) {
+            return 'false';
+        }
+        if (null === x) {
+            return 'null';
+        }
+        if (true === x) {
+            return 'true';
+        }
+        return "" + x;
     };
     var D = document;
     var W = window;
@@ -214,9 +217,6 @@
             }
         }
         return node;
-    };
-    var fromHTML = function fromHTML(x) {
-        return x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
     };
     var getOffset = function getOffset(node) {
         return [node.offsetLeft, node.offsetTop];
