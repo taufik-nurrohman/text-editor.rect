@@ -28,7 +28,6 @@ d</textarea></p>
     <script src="../index.min.js"></script>
     <script>
       Object.assign(TE.prototype, TE.Rect.that);
-
       let checkBox = document.querySelector('input[type="checkbox"]'),
           caret = [
               document.createElement('span'),
@@ -82,7 +81,6 @@ d</textarea></p>
           });
           editor.self.addEventListener('mousemove', setCaretPosition, false);
       }
-
       run(document.querySelector('textarea'));
     </script>
   </body>
