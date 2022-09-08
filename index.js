@@ -23,9 +23,9 @@
  * SOFTWARE.
  *
  */
-(function(global, factory) {
+(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.TE = global.TE || {}, global.TE.Rect = {})));
-})(this, function(exports) {
+})(this, function (exports) {
     'use strict';
     var isArray = function isArray(x) {
         return Array.isArray(x);
@@ -61,7 +61,7 @@
         return 'string' === typeof x;
     };
     var toCaseCamel = function toCaseCamel(x) {
-        return x.replace(/[-_.](\w)/g, function(m0, m1) {
+        return x.replace(/[-_.](\w)/g, function (m0, m1) {
             return toCaseUpper(m1);
         });
     };
@@ -76,7 +76,7 @@
     };
     var toValue = function toValue(x) {
         if (isArray(x)) {
-            return x.map(function(v) {
+            return x.map(function (v) {
                 return toValue(v);
             });
         }
@@ -105,7 +105,7 @@
     };
     var fromValue = function fromValue(x) {
         if (isArray(x)) {
-            return x.map(function(v) {
+            return x.map(function (v) {
                 return fromValue(x);
             });
         }
@@ -301,7 +301,7 @@
     const that = {
         mirror: null
     };
-    that.rect = function(key) {
+    that.rect = function (key) {
         let t = this;
         if (!t.mirror) {
             t.mirror = setElement('div');

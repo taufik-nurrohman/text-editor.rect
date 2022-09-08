@@ -102,7 +102,7 @@ export const that = {
     mirror: null
 };
 
-that.rect = function(key) {
+that.rect = function (key) {
     let t = this;
     if (!t.mirror) {
         t.mirror = setElement('div');
