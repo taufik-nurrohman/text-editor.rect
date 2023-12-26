@@ -2,7 +2,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright © 2022 Taufik Nurrohman <https://github.com/taufik-nurrohman>
+ * Copyright © 2023 Taufik Nurrohman <https://github.com/taufik-nurrohman>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the “Software”), to deal
@@ -23,9 +23,9 @@
  * SOFTWARE.
  *
  */
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.TE = global.TE || {}, global.TE.Rect = {})));
-})(this, function (exports) {
+(function (g, f) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? f(exports) : typeof define === 'function' && define.amd ? define(['exports'], f) : (g = typeof globalThis !== 'undefined' ? globalThis : g || self, f((g.TE = g.TE || {}, g.TE.Rect = {})));
+})(this, (function (exports) {
     'use strict';
     var isArray = function isArray(x) {
         return Array.isArray(x);
@@ -33,8 +33,8 @@
     var isDefined = function isDefined(x) {
         return 'undefined' !== typeof x;
     };
-    var isInstance = function isInstance(x, of ) {
-        return x && isSet( of ) && x instanceof of ;
+    var isInstance = function isInstance(x, of) {
+        return x && isSet(of) && x instanceof of ;
     };
     var isNull = function isNull(x) {
         return null === x;
@@ -100,8 +100,12 @@
         }
         return x;
     };
-    var fromHTML = function fromHTML(x) {
-        return x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
+    var fromHTML = function fromHTML(x, escapeQuote) {
+        x = x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
+        if (escapeQuote) {
+            x = x.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+        }
+        return x;
     };
     var fromValue = function fromValue(x) {
         if (isArray(x)) {
@@ -224,38 +228,46 @@
     var getSize = function getSize(node) {
         return isWindow(node) ? [node.innerWidth, node.innerHeight] : [node.offsetWidth, node.offsetHeight];
     };
+    var _window$TE$state$with, _window;
 
-    function el(a, b = 'span') {
+    function el(a, b) {
+        if (b === void 0) {
+            b = 'span';
+        }
         return '<' + b + '>' + a + '</' + b + '>';
     }
 
     function getRectSelection($, div, source) {
-        let span = el('&zwnj;'),
+        var span = el('&zwnj;'),
             props = ['border-bottom-width', 'border-left-width', 'border-right-width', 'border-top-width', 'box-sizing', 'direction', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'height', 'letter-spacing', 'line-height', 'max-height', 'max-width', 'min-height', 'min-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'tab-size', 'text-align', 'text-decoration', 'text-indent', 'text-transform', 'width', 'word-spacing'];
         setHTML(div, el(fromHTML($.before)) + span + el(fromHTML($.value), 'mark') + span + el(fromHTML($.after)));
-        let styles = "";
-        props.forEach(prop => {
-            let value = getStyle(source, prop);
+        var styles = "";
+        props.forEach(function (prop) {
+            var value = getStyle(source, prop);
             value && (styles += prop + ':' + value + ';');
         });
-        let L = toNumber(getStyle(source, props[1]), 0),
+        var L = toNumber(getStyle(source, props[1]), 0),
             T = toNumber(getStyle(source, props[3]), 0),
-            [X, Y] = getOffset(source),
-            [W, H] = getSize(source);
+            _getOffset = getOffset(source),
+            X = _getOffset[0],
+            Y = _getOffset[1],
+            _getSize = getSize(source),
+            W = _getSize[0],
+            H = _getSize[1];
         setAttribute(div, 'style', styles);
         setStyles(div, {
             'border-style': 'solid',
             'white-space': 'pre-wrap',
             'word-wrap': 'break-word',
-            'overflow': 'auto',
+            'overflow': 'hidden',
             'position': 'absolute',
             'left': X,
             'top': Y,
             'visibility': 'hidden'
         });
         setChildLast(B, div);
-        let c = getChildren(div);
-        let start = c[1],
+        var c = getChildren(div);
+        var start = c[1],
             rect = c[2],
             end = c[3],
             startOffset = getOffset(start),
@@ -298,16 +310,17 @@
             y: Y // Top offset of text area
         }];
     }
-    const that = {
-        mirror: null
-    };
-    that.rect = function (key) {
-        let t = this;
-        if (!t.mirror) {
-            t.mirror = setElement('div');
-        }
-        let rect = getRectSelection(t.$(), t.mirror, t.self);
-        return isSet(key) ? [rect[0][key], rect[1][key], rect[2][key], rect[3][key]] : rect;
-    };
-    exports.that = that;
-});
+
+    function rect(source, state) {
+        var $ = this;
+        $.mirror = setElement('div');
+        $.rect = function (key) {
+            var r = getRectSelection($.$(), $.mirror, source);
+            return isSet(key) ? [r[0][key], r[1][key], r[2][key], r[3][key]] : r;
+        };
+    }
+    // @if iife
+    isArray((_window$TE$state$with = (_window = window) == null || (_window = _window.TE) == null || (_window = _window.state) == null ? void 0 : _window.with) != null ? _window$TE$state$with : 0) && window.TE.state.with.push(rect);
+    // @end-if
+    exports.rect = rect;
+}));

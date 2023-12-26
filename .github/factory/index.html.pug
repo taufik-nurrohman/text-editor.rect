@@ -6,8 +6,6 @@ block state
 
 block script
   script
-    | Object.assign(TE.prototype, TE.Rect.that);
-    |
     | const editor = new TE(document.querySelector('textarea'));
 
 block style
@@ -74,20 +72,28 @@ block content
       | &lt;script src="#[a(href='../text-editor/index.min.js' target='_blank') ./text-editor/index.min.js]"&gt;&lt;/script&gt;
       | &lt;script src="#[a(href='index.min.js' target='_blank') ./text-editor.rect/index.min.js]"&gt;&lt;/script&gt;
       | &lt;script&gt;
-      |   Object.assign(TE.prototype, TE.Rect.that);
+      |   let editor = new TE(document.querySelector('textarea'));
       | &lt;/script&gt;
     h4 CommonJS
     pre: code
       | const TE = require('@taufik-nurrohman/text-editor').default;
-      | const {that: thatRect} = require('@taufik-nurrohman/text-editor.rect').default;
+      | const {rect} = require('@taufik-nurrohman/text-editor.rect');
       |
-      | Object.assign(TE.prototype, thatRect);
+      | TE.state.with.push(rect); // Load as a core extension
+      |
+      | let editor = new TE(document.querySelector('textarea'), {
+      |         with: [rect] // Load as an optional extension
+      |     });
     h4 ECMAScript
     pre: code
       | import TE from '@taufik-nurrohman/text-editor';
-      | import {that as thatRect} from '@taufik-nurrohman/text-editor.rect';
+      | import {rect} from '@taufik-nurrohman/text-editor.rect';
       |
-      | Object.assign(TE.prototype, thatRect);
+      | TE.state.with.push(rect); // Load as a core extension
+      |
+      | let editor = new TE(document.querySelector('textarea'), {
+      |         with: [rect] // Load as an optional extension
+      |     });
     h2 Examples
     ul
       li: a(href='tweak/caret.html' target='_blank') Custom Caret Example

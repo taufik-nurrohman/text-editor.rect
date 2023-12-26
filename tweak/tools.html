@@ -25,7 +25,7 @@
       <p class="tools-line"><button onclick="editor.wrap('**', '**')"><b>B</b></button> <button onclick="editor.wrap('_', '_')"><i>I</i></button></p>
       <p><textarea cols="100" rows="20" spellcheck="false" style="line-height:1.25em;">The MIT License (MIT)
 
-Copyright © 2022 Taufik Nurrohman
+Copyright © 2023 Taufik Nurrohman
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -41,7 +41,6 @@ d</textarea></p>
     <script src="../../text-editor/index.min.js"></script>
     <script src="../index.min.js"></script>
     <script>
-      Object.assign(TE.prototype, TE.Rect.that);
       const editor = new TE(document.querySelector('textarea'));
       const blocks = document.querySelector('.tools-block');
       const lines = document.querySelector('.tools-line');

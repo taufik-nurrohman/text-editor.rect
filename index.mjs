@@ -1,6 +1,6 @@
 import {B, getChildren, getStyle, letElement, setAttribute, setChildLast, setElement, setHTML, setStyles} from '@taufik-nurrohman/document';
 import {fromHTML} from '@taufik-nurrohman/from';
-import {isSet} from '@taufik-nurrohman/is';
+import {isArray, isSet} from '@taufik-nurrohman/is';
 import {getOffset, getSize} from '@taufik-nurrohman/rect';
 import {toNumber} from '@taufik-nurrohman/to';
 
@@ -58,7 +58,7 @@ function getRectSelection($, div, source) {
         'border-style': 'solid',
         'white-space': 'pre-wrap',
         'word-wrap': 'break-word',
-        'overflow': 'auto',
+        'overflow': 'hidden',
         'position': 'absolute',
         'left': X,
         'top': Y,
@@ -98,20 +98,16 @@ function getRectSelection($, div, source) {
     }];
 }
 
-export const that = {
-    mirror: null
-};
-
-that.rect = function (key) {
-    let t = this;
-    if (!t.mirror) {
-        t.mirror = setElement('div');
-    }
-    let rect = getRectSelection(t.$(), t.mirror, t.self);
-    return isSet(key) ? [
-        rect[0][key],
-        rect[1][key],
-        rect[2][key],
-        rect[3][key]
-    ] : rect;
-};
+export function rect(source, state) {
+    let $ = this;
+    $.mirror = setElement('div');
+    $.rect = function (key) {
+        let r = getRectSelection($.$(), $.mirror, source);
+        return isSet(key) ? [
+            r[0][key],
+            r[1][key],
+            r[2][key],
+            r[3][key]
+        ] : r;
+    };
+}

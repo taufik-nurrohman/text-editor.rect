@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
-    <title>Text Editor Rect 2.1.13</title>
+    <title>Text Editor Rect 3.0.0</title>
     <style>
       * {
         box-sizing: border-box;
@@ -61,7 +61,7 @@
   </head>
   <body>
     <header>
-      <h1>Text Editor Rect 2.1.13</h1>
+      <h1>Text Editor Rect 3.0.0</h1>
       <p>Rect extension for <a href="../text-editor/index.html">text editor</a>.</p>
       <hr>
       <p>Provides a feature to get cursor position and selection dimension in pixels.</p>
@@ -74,18 +74,26 @@
       <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
 &lt;script src="<a href="index.min.js" target="_blank">./text-editor.rect/index.min.js</a>"&gt;&lt;/script&gt;
 &lt;script&gt;
-  Object.assign(TE.prototype, TE.Rect.that);
+  let editor = new TE(document.querySelector('textarea'));
 &lt;/script&gt;</code></pre>
       <h4>CommonJS</h4>
       <pre><code>const TE = require('@taufik-nurrohman/text-editor').default;
-const {that: thatRect} = require('@taufik-nurrohman/text-editor.rect').default;
+const {rect} = require('@taufik-nurrohman/text-editor.rect');
 
-Object.assign(TE.prototype, thatRect);</code></pre>
+TE.state.with.push(rect); // Load as a core extension
+
+let editor = new TE(document.querySelector('textarea'), {
+        with: [rect] // Load as an optional extension
+    });</code></pre>
       <h4>ECMAScript</h4>
       <pre><code>import TE from '@taufik-nurrohman/text-editor';
-import {that as thatRect} from '@taufik-nurrohman/text-editor.rect';
+import {rect} from '@taufik-nurrohman/text-editor.rect';
 
-Object.assign(TE.prototype, thatRect);</code></pre>
+TE.state.with.push(rect); // Load as a core extension
+
+let editor = new TE(document.querySelector('textarea'), {
+        with: [rect] // Load as an optional extension
+    });</code></pre>
       <h2>Examples</h2>
       <ul>
         <li><a href="tweak/caret.html" target="_blank">Custom Caret Example</a></li>
@@ -105,12 +113,11 @@ Object.assign(TE.prototype, thatRect);</code></pre>
     </main>
     <footer>
       <hr>
-      <p>&copy; 2022 <a href="/">Taufik Nurrohman</a></p>
+      <p>&copy; 2023 <a href="/">Taufik Nurrohman</a></p>
     </footer>
     <script src="../text-editor/index.min.js"></script>
     <script src="index.min.js"></script>
     <script>
-      Object.assign(TE.prototype, TE.Rect.that);
       const editor = new TE(document.querySelector('textarea'));
     </script>
   </body>
