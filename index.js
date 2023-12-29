@@ -24,8 +24,8 @@
  *
  */
 (function (g, f) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? f(exports) : typeof define === 'function' && define.amd ? define(['exports'], f) : (g = typeof globalThis !== 'undefined' ? globalThis : g || self, f((g.TE = g.TE || {}, g.TE.Rect = {})));
-})(this, (function (exports) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = f() : typeof define === 'function' && define.amd ? define(f) : (g = typeof globalThis !== 'undefined' ? globalThis : g || self, (g.TextEditor = g.TextEditor || {}, g.TextEditor.Rect = f()));
+})(this, (function () {
     'use strict';
     var isArray = function isArray(x) {
         return Array.isArray(x);
@@ -228,7 +228,6 @@
     var getSize = function getSize(node) {
         return isWindow(node) ? [node.innerWidth, node.innerHeight] : [node.offsetWidth, node.offsetHeight];
     };
-    var _window$TE$state$with, _window;
 
     function el(a, b) {
         if (b === void 0) {
@@ -237,21 +236,21 @@
         return '<' + b + '>' + a + '</' + b + '>';
     }
 
-    function getRectSelection($, div, source) {
+    function getRectSelection($, div, self) {
         var span = el('&zwnj;'),
             props = ['border-bottom-width', 'border-left-width', 'border-right-width', 'border-top-width', 'box-sizing', 'direction', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'height', 'letter-spacing', 'line-height', 'max-height', 'max-width', 'min-height', 'min-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'tab-size', 'text-align', 'text-decoration', 'text-indent', 'text-transform', 'width', 'word-spacing'];
         setHTML(div, el(fromHTML($.before)) + span + el(fromHTML($.value), 'mark') + span + el(fromHTML($.after)));
         var styles = "";
         props.forEach(function (prop) {
-            var value = getStyle(source, prop);
+            var value = getStyle(self, prop);
             value && (styles += prop + ':' + value + ';');
         });
-        var L = toNumber(getStyle(source, props[1]), 0),
-            T = toNumber(getStyle(source, props[3]), 0),
-            _getOffset = getOffset(source),
+        var L = toNumber(getStyle(self, props[1]), 0),
+            T = toNumber(getStyle(self, props[3]), 0),
+            _getOffset = getOffset(self),
             X = _getOffset[0],
             Y = _getOffset[1],
-            _getSize = getSize(source),
+            _getSize = getSize(self),
             W = _getSize[0],
             H = _getSize[1];
         setAttribute(div, 'style', styles);
@@ -295,7 +294,7 @@
         }, {
             h: rectSize[1],
             // Total selection height
-            w: rectOffset[0],
+            w: rectSize[0],
             // Total selection width
             x: rectOffset[0] + X + L,
             // Left offset of the whole selection
@@ -311,16 +310,13 @@
         }];
     }
 
-    function rect(source, state) {
+    function Rect(self) {
         var $ = this;
         $.mirror = setElement('div');
         $.rect = function (key) {
-            var r = getRectSelection($.$(), $.mirror, source);
+            var r = getRectSelection($.$(), $.mirror, self);
             return isSet(key) ? [r[0][key], r[1][key], r[2][key], r[3][key]] : r;
         };
     }
-    // @if iife
-    isArray((_window$TE$state$with = (_window = window) == null || (_window = _window.TE) == null || (_window = _window.state) == null ? void 0 : _window.with) != null ? _window$TE$state$with : 0) && window.TE.state.with.push(rect);
-    // @end-if
-    exports.rect = rect;
+    return Rect;
 }));

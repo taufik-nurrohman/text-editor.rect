@@ -47,7 +47,7 @@
     "url": "git+https://github.com/taufik-nurrohman/text-editor.rect.git"
   },
   "scripts": {
-    "pack": "pack --clean=false --from=.github/factory --js-format=umd --js-name=TE.Rect --js-top='%(js.license)' --mjs=true --to=."
+    "pack": "pack --clean=false --from=.factory --js-format=umd --js-name=TextEditor.Rect --js-top='%(js.license)' --mjs=true --to=."
   },
-  "version": "3.0.0"
+  "version": "4.0.0"
 }

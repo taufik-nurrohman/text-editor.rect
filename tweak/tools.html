@@ -41,7 +41,9 @@ d</textarea></p>
     <script src="../../text-editor/index.min.js"></script>
     <script src="../index.min.js"></script>
     <script>
-      const editor = new TE(document.querySelector('textarea'));
+      const editor = new TextEditor(document.querySelector('textarea'), {
+          with: [TextEditor.Rect]
+      });
       const blocks = document.querySelector('.tools-block');
       const lines = document.querySelector('.tools-line');
 

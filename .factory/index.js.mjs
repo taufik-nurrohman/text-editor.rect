@@ -8,7 +8,7 @@ function el(a, b = 'span') {
     return '<' + b + '>' + a + '</' + b + '>';
 }
 
-function getRectSelection($, div, source) {
+function getRectSelection($, div, self) {
     let span = el('&zwnj;'),
         props = [
             'border-bottom-width',
@@ -46,13 +46,13 @@ function getRectSelection($, div, source) {
     setHTML(div, el(fromHTML($.before)) + span + el(fromHTML($.value), 'mark') + span + el(fromHTML($.after)));
     let styles = "";
     props.forEach(prop => {
-        let value = getStyle(source, prop);
+        let value = getStyle(self, prop);
         value && (styles += prop + ':' + value + ';');
     });
-    let L = toNumber(getStyle(source, props[1]), 0),
-        T = toNumber(getStyle(source, props[3]), 0),
-        [X, Y] = getOffset(source),
-        [W, H] = getSize(source);
+    let L = toNumber(getStyle(self, props[1]), 0),
+        T = toNumber(getStyle(self, props[3]), 0),
+        [X, Y] = getOffset(self),
+        [W, H] = getSize(self);
     setAttribute(div, 'style', styles);
     setStyles(div, {
         'border-style': 'solid',
@@ -87,7 +87,7 @@ function getRectSelection($, div, source) {
         y: endOffset[1] + Y + T // Top offset of selection end
     }, {
         h: rectSize[1], // Total selection height
-        w: rectOffset[0], // Total selection width
+        w: rectSize[0], // Total selection width
         x: rectOffset[0] + X + L, // Left offset of the whole selection
         y: rectOffset[1] + Y + T // Top offset of the whole selection
     }, {
@@ -98,11 +98,11 @@ function getRectSelection($, div, source) {
     }];
 }
 
-export function rect(source, state) {
+export default function Rect(self) {
     let $ = this;
     $.mirror = setElement('div');
     $.rect = function (key) {
-        let r = getRectSelection($.$(), $.mirror, source);
+        let r = getRectSelection($.$(), $.mirror, self);
         return isSet(key) ? [
             r[0][key],
             r[1][key],
@@ -111,7 +111,3 @@ export function rect(source, state) {
         ] : r;
     };
 }
-
-// @if iife
-isArray(window?.TE?.state?.with ?? 0) && window.TE.state.with.push(rect);
-// @end-if

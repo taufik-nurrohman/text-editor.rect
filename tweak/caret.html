@@ -42,7 +42,9 @@ d</textarea></p>
                   editor.mirror.style.visibility = this.checked ? 'visible' : 'hidden';
               }
           }
-          const editor = new TE(el);
+          const editor = new TextEditor(el, {
+              with: [TextEditor.Rect]
+          });
           let s = 'position:absolute;width:2px;z-index:9999;visibility:hidden;pointer-events:none;margin-left:-1px;';
           caret[0].style.cssText = s + 'background:red;';
           caret[1].style.cssText = s + 'background:blue;';
