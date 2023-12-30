@@ -4,7 +4,7 @@ block state
   - const scripts = ['../text-editor/index.min.js', 'index.min.js']
   - const styles = ['../layout/index.min.css']
   - const theme = '#000'
-  - const title = 'Text Editor: Rect ' + version
+  - const title = 'Rect ' + version
 
 block script
   script
@@ -14,10 +14,6 @@ block script
 
 block style
   style
-    | :root {
-    |   border-top: 5px solid #00f;
-    | }
-    |
     | @media (min-width: 45rem) {
     |   :root {
     |     padding-bottom: 3rem;
@@ -33,7 +29,7 @@ block style
 block content
   header
     h1= title
-    p Rect extension for #[a(href='../text-editor/index.html') text editor].
+    p Rect extension for #[a(href='../text-editor/index.html') Text Editor].
     hr
     p Provides a feature to get cursor position and selection dimension in pixels.
   main
