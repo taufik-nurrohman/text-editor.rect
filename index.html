@@ -2,73 +2,39 @@
 <html dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta content="#000" name="theme-color">
     <meta content="width=device-width" name="viewport">
     <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
-    <title>Text Editor Rect 4.0.0</title>
+    <title>Text Editor: Rect 4.0.1</title>
+    <link href="../layout/index.min.css" rel="stylesheet">
     <style>
-      * {
-        box-sizing: border-box;
-      }
       :root {
-        background: #fff;
-        border-top: 4px solid;
-        color: #000;
-        font: normal normal 16px/1.25 serif;
+        border-top: 5px solid #00f;
       }
-      a {
-        color: #009;
-        text-decoration: none;
-      }
-      a,
-      code {
-        word-wrap: break-word;
-      }
-      code {
-        font-family: monospace;
-        font-size: 80%;
-      }
-      footer,
-      header,
-      main,
-      nav {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      hr {
-        border: 0;
-        border-top: 1px dashed;
-        color: inherit;
-        height: 0;
-      }
-      pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
-      pre code {
-        background: #eee;
-        display: block;
-        padding: 1em;
-      }
-      table {
-        width: 100%;
-      }
-      td,
-      th {
-        text-align: left;
-        vertical-align: top;
+
+      @media (min-width: 45rem) {
+        :root {
+          padding-bottom: 3rem;
+          padding-top: 3rem;
+        }
+        body > * {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 45rem;
+        }
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Text Editor Rect 4.0.0</h1>
+      <h1>Text Editor: Rect 4.0.1</h1>
       <p>Rect extension for <a href="../text-editor/index.html">text editor</a>.</p>
       <hr>
       <p>Provides a feature to get cursor position and selection dimension in pixels.</p>
     </header>
     <main>
-      <p><textarea spellcheck="false">abcdef</textarea></p>
-      <p><button onclick="alert(JSON.stringify(editor.rect(), null, 2));">Inspect</button></p>
+      <p><textarea id="in" placeholder="Type something&hellip;" spellcheck="false" style="display:block;width:100%;">abcdef</textarea></p>
+      <p role="group"><button onclick="alert(JSON.stringify(editor.rect(), null, 2));">Inspect</button></p>
       <h2>Usage</h2>
       <h4>Browser</h4>
       <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
@@ -80,21 +46,21 @@
 &lt;/script&gt;</code></pre>
       <h4>CommonJS</h4>
       <pre><code>const TextEditor = require('@taufik-nurrohman/text-editor').default;
-const Rect = require('@taufik-nurrohman/text-editor.rect').default;
+const TextEditorRect = require('@taufik-nurrohman/text-editor.rect').default;
 
-TextEditor.state.with.push(Rect); // Load as a core extension
+TextEditor.state.with.push(TextEditorRect); // Load as a core extension
 
 const editor = new TextEditor(document.querySelector('textarea'), {
-    with: [Rect] // Load as an optional extension
+    with: [TextEditorRect] // Load as an optional extension
 });</code></pre>
       <h4>ECMAScript</h4>
       <pre><code>import TextEditor from '@taufik-nurrohman/text-editor';
-import Rect from '@taufik-nurrohman/text-editor.rect';
+import TextEditorRect from '@taufik-nurrohman/text-editor.rect';
 
-TextEditor.state.with.push(Rect); // Load as a core extension
+TextEditor.state.with.push(TextEditorRect); // Load as a core extension
 
 const editor = new TextEditor(document.querySelector('textarea'), {
-    with: [Rect] // Load as an optional extension
+    with: [TextEditorRect] // Load as an optional extension
 });</code></pre>
       <h2>Examples</h2>
       <ul>
@@ -102,9 +68,9 @@ const editor = new TextEditor(document.querySelector('textarea'), {
         <li><a href="tweak/tools.html" target="_blank">Floating Tools Example</a></li>
       </ul>
       <h2>Methods and Properties</h2>
-      <h3>editor.mirror</h3>
+      <h3><code>editor.mirror</code></h3>
       <p>Return a <code>&lt;div&gt;</code> element that mirrors the <code>&lt;textarea&gt;</code> element.</p>
-      <h3>editor.rect(key)</h3>
+      <h3><code>editor.rect(key)</code></h3>
       <p>Get current selection offset and dimension data.</p>
       <pre><code>// [&lt;selection start&gt;, &lt;selection end&gt;, &lt;selection as rectangle&gt;, &lt;the editor&gt;]
 

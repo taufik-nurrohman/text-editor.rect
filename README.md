@@ -1,5 +1,5 @@
-Text Editor Rect
-================
+Text Editor: Rect
+=================
 
 > Rect extension for [text editor](https://github.com/taufik-nurrohman/text-editor).
 
