@@ -38,7 +38,8 @@ block content
       'width': '100%'
     }) abcdef
     p(role='group')
-      button(onclick='alert(JSON.stringify(editor.rect(), null, 2));') Inspect
+      button(onclick='document.querySelector(\'#out\').textContent = JSON.stringify(editor.rect(), null, 2);') Inspect
+    pre#out
     h2 Usage
     h4 Browser
     pre: code

@@ -30,7 +30,8 @@
     </header>
     <main>
       <p><textarea id="in" placeholder="Type something&hellip;" spellcheck="false" style="display:block;width:100%;">abcdef</textarea></p>
-      <p role="group"><button onclick="alert(JSON.stringify(editor.rect(), null, 2));">Inspect</button></p>
+      <p role="group"><button onclick="document.querySelector('#out').textContent = JSON.stringify(editor.rect(), null, 2);">Inspect</button></p>
+      <pre id="out"></pre>
       <h2>Usage</h2>
       <h4>Browser</h4>
       <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
@@ -77,7 +78,7 @@ const editor = new TextEditor(document.querySelector('textarea'), {
     </main>
     <footer>
       <hr>
-      <p>&copy; 2023 <a href="/">Taufik Nurrohman</a></p>
+      <p>&copy; 2024 <a href="/">Taufik Nurrohman</a></p>
     </footer>
     <script src="../text-editor/index.min.js"></script>
     <script src="index.min.js"></script>
