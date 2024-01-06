@@ -4,7 +4,7 @@ block state
   - const scripts = ['../text-editor/index.min.js', 'index.min.js']
   - const styles = ['../layout/index.min.css']
   - const theme = '#000'
-  - const title = 'Rect ' + version
+  - const title = 'Text Editor Rect ' + version
 
 block script
   script
@@ -14,26 +14,19 @@ block script
 
 block style
   style
-    | @media (min-width: 45rem) {
-    |   :root {
-    |     padding-bottom: 3rem;
-    |     padding-top: 3rem;
-    |   }
-    |   body > * {
-    |     margin-left: auto;
-    |     margin-right: auto;
-    |     max-width: 45rem;
-    |   }
+    | #out:empty {
+    |   display: none;
     | }
 
 block content
   header
-    h1= title
-    p Rect extension for #[a(href='../text-editor/index.html') Text Editor].
+    h1
+      a(href='../text-editor/index.html') &laquo;
+      = ' ' + title
+    p Rect extension for #[a(href='../text-editor/index.html') Text Editor]. This extension provides a feature to get cursor position and selection dimension in pixels.
     hr
-    p Provides a feature to get cursor position and selection dimension in pixels.
   main
-    p: textarea#in(placeholder!='Type something&hellip;' spellcheck='false' style={
+    p: textarea#in(placeholder!='Content goes here&hellip;' spellcheck='false' style={
       'display': 'block',
       'width': '100%'
     }) abcdef
@@ -72,20 +65,18 @@ block content
       | });
     h2 Examples
     ul
-      li: a(href='tweak/caret.html' target='_blank') Custom Caret Example
-      li: a(href='tweak/tools.html' target='_blank') Floating Tools Example
-    h2 Methods and Properties
-    h3: code editor.mirror
-    p Return a #[code &lt;div&gt;] element that mirrors the #[code &lt;textarea&gt;] element.
-    h3: code editor.rect(key)
+      li: a(href='tweak/caret.html' target='_blank') Custom Caret
+      li: a(href='tweak/tools.html' target='_blank') Floating Tools
+    h2 Methods
+    h3 Instance Methods
+    h4: code editor.rect(key)
     p Get current selection offset and dimension data.
     pre: code
-      | // [&lt;selection start&gt;, &lt;selection end&gt;, &lt;selection as rectangle&gt;, &lt;the editor&gt;]
-      |
-      | // h: height
-      | // w: width
-      | // x: left
-      | // y: top
+      | console.log(editor.rect()); // [start, end, selection, editor]
+    h2 Properties
+    h3 Instance Properties
+    h4: code editor.mirror
+    p Return a #[code &lt;div&gt;] element that mirrors the #[code &lt;textarea&gt;] element.
   footer
     hr
     p

@@ -101,7 +101,7 @@ function getRectSelection($, div, self) {
 export default function Rect(self) {
     let $ = this;
     $.mirror = setElement('div');
-    $.rect = function (key) {
+    $.rect = key => {
         let r = getRectSelection($.$(), $.mirror, self);
         return isSet(key) ? [
             r[0][key],
