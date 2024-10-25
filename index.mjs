@@ -1,7 +1,7 @@
-import {B, getChildren, getStyle, letElement, setAttribute, setChildLast, setElement, setHTML, setStyles} from '@taufik-nurrohman/document';
+import {B, getChildren, getStyle, setAttribute, setChildLast, setElement, setHTML, setStyles} from '@taufik-nurrohman/document';
 import {fromHTML} from '@taufik-nurrohman/from';
-import {isArray, isSet} from '@taufik-nurrohman/is';
 import {getOffset, getSize} from '@taufik-nurrohman/rect';
+import {isSet} from '@taufik-nurrohman/is';
 import {toNumber} from '@taufik-nurrohman/to';
 
 function el(a, b = 'span') {

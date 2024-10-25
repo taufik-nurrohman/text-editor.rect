@@ -102,9 +102,6 @@
     };
     var fromHTML = function fromHTML(x, escapeQuote) {
         x = x.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
-        if (escapeQuote) {
-            x = x.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
-        }
         return x;
     };
     var fromValue = function fromValue(x) {

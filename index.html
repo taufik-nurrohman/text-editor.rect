@@ -5,9 +5,14 @@
     <meta content="#000" name="theme-color">
     <meta content="width=device-width" name="viewport">
     <meta content="Provides a feature to get cursor position and selection dimension in pixels." name="description">
-    <title>Text Editor Rect 4.0.2</title>
+    <title>Text Editor Rect 4.0.3</title>
     <link href="../layout/index.min.css" rel="stylesheet">
     <style>
+      body {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 60rem;
+      }
       #out:empty {
         display: none;
       }
@@ -15,15 +20,16 @@
   </head>
   <body>
     <header>
-      <h1><a href="../text-editor/index.html">&laquo;</a> Text Editor Rect 4.0.2</h1>
-      <p>Rect extension for <a href="../text-editor/index.html">Text Editor</a>. This extension provides a feature to get cursor position and selection dimension in pixels.</p>
-      <hr>
+      <hgroup>
+        <h1><a href="../text-editor/index.html">&laquo;</a> Text Editor Rect 4.0.3</h1>
+        <p>This extension provides a feature to get cursor position and selection dimension in pixels.</p>
+      </hgroup>
     </header>
     <main>
       <p><textarea id="in" placeholder="Content goes here&hellip;" spellcheck="false" style="display:block;width:100%;">abcdef</textarea></p>
       <p role="group"><button onclick="document.querySelector('#out').textContent = JSON.stringify(editor.rect(), null, 2);">Inspect</button></p>
       <pre id="out"></pre>
-      <h2>Usage</h2>
+      <h2 id="usage"><a href="#usage">#</a> Usage</h2>
       <h4>Browser</h4>
       <pre><code>&lt;script src="<a href="../text-editor/index.min.js" target="_blank">./text-editor/index.min.js</a>"&gt;&lt;/script&gt;
 &lt;script src="<a href="index.min.js" target="_blank">./text-editor.rect/index.min.js</a>"&gt;&lt;/script&gt;
@@ -50,17 +56,17 @@ TextEditor.state.with.push(TextEditorRect); // Load as a core extension
 const editor = new TextEditor(document.querySelector('textarea'), {
     with: [TextEditorRect] // Load as an optional extension
 });</code></pre>
-      <h2>Examples</h2>
+      <h2 id="tweaks"><a href="#tweaks">#</a> Tweaks</h2>
       <ul>
         <li><a href="tweak/caret.html" target="_blank">Custom Caret</a></li>
         <li><a href="tweak/tools.html" target="_blank">Floating Tools</a></li>
       </ul>
-      <h2>Methods</h2>
+      <h2 id="methods"><a href="#methods">#</a> Methods</h2>
       <h3>Instance Methods</h3>
       <h4><code>editor.rect(key)</code></h4>
       <p>Get current selection offset and dimension data.</p>
       <pre><code>console.log(editor.rect()); // [start, end, selection, editor]</code></pre>
-      <h2>Properties</h2>
+      <h2 id="properties"><a href="#properties">#</a> Properties</h2>
       <h3>Instance Properties</h3>
       <h4><code>editor.mirror</code></h4>
       <p>Return a <code>&lt;div&gt;</code> element that mirrors the <code>&lt;textarea&gt;</code> element.</p>
