@@ -1,7 +1,7 @@
 import {B, getChildren, getStyle, setAttribute, setChildLast, setElement, setHTML, setStyles} from '@taufik-nurrohman/document';
 import {fromHTML} from '@taufik-nurrohman/from';
 import {getOffset, getSize} from '@taufik-nurrohman/rect';
-import {isSet} from '@taufik-nurrohman/is';
+import {isFunction, isSet} from '@taufik-nurrohman/is';
 import {toNumber} from '@taufik-nurrohman/to';
 
 function el(a, b = 'span') {
@@ -99,15 +99,20 @@ function getRectSelection($, div, self) {
 }
 
 export default function Rect(self) {
-    let $ = this;
+    const $ = this;
+    const $$ = $.constructor.prototype;
     $.mirror = setElement('div');
-    $.rect = key => {
-        let r = getRectSelection($.$(), $.mirror, self);
+    !isFunction($$.rect) && ($$.rect = function (key) {
+        let $ = this, r = getRectSelection($.$(), $.mirror, $.self);
         return isSet(key) ? [
             r[0][key],
             r[1][key],
             r[2][key],
             r[3][key]
         ] : r;
-    };
+    });
 }
+
+Object.defineProperty(Rect, 'name', {
+    value: 'TextEditor.Rect'
+});

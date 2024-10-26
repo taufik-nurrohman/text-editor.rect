@@ -33,6 +33,9 @@
     var isDefined = function isDefined(x) {
         return 'undefined' !== typeof x;
     };
+    var isFunction = function isFunction(x) {
+        return 'function' === typeof x;
+    };
     var isInstance = function isInstance(x, of) {
         return x && isSet(of) && x instanceof of ;
     };
@@ -309,11 +312,16 @@
 
     function Rect(self) {
         var $ = this;
+        var $$ = $.constructor.prototype;
         $.mirror = setElement('div');
-        $.rect = function (key) {
-            var r = getRectSelection($.$(), $.mirror, self);
+        !isFunction($$.rect) && ($$.rect = function (key) {
+            var $ = this,
+                r = getRectSelection($.$(), $.mirror, $.self);
             return isSet(key) ? [r[0][key], r[1][key], r[2][key], r[3][key]] : r;
-        };
+        });
     }
+    Object.defineProperty(Rect, 'name', {
+        value: 'TextEditor.Rect'
+    });
     return Rect;
 }));
