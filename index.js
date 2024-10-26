@@ -131,8 +131,8 @@
     var W = window;
     var B = D.body;
     var getChildren = function getChildren(parent, index) {
-        var children = parent.children;
-        return isNumber(index) ? children[index] || null : children || [];
+        var children = [].slice.call(parent.children);
+        return isNumber(index) ? children[index] || null : children;
     };
     var getStyle = function getStyle(node, style, parseValue) {
         if (parseValue === void 0) {
