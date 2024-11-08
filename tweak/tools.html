@@ -8,14 +8,14 @@
     <style>
       .tools-block,
       .tools-line {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
         background: #fff;
         border: 1px solid;
-        padding: .25em;
-        box-shadow: 0 5px 8px -2px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 8px -2px rgba(0, 0, 0, 0.5);
+        display: none;
+        left: 0;
+        padding: 0.25em;
+        position: absolute;
+        top: 0;
       }
     </style>
   </head>
@@ -63,19 +63,18 @@ d</textarea></p>
               if (value) {
                   let rect = editor.rect();
                   lines.style.display = 'block';
-                  lines.style.left = (rect[0].x - this.scrollLeft) + 'px';
-                  lines.style.top = (rect[0].y - this.scrollTop) + 'px';
+                  lines.style.left = rect[0].x + 'px';
+                  lines.style.top = rect[0].y + 'px';
               } else if (!value && (!after || !before || '\n' === after.slice(0, 1) && '\n' === before.slice(-1)) || null === editor.get()) {
                   let rect = editor.rect();
                   blocks.style.display = 'block';
-                  blocks.style.left = (rect[0].x - this.scrollLeft) + 'px';
-                  blocks.style.top = (rect[0].y - this.scrollTop) + 'px';
+                  blocks.style.left = rect[0].x + 'px';
+                  blocks.style.top = rect[0].y + 'px';
               }
           }, 1);
       }
-      editor.self.addEventListener('keydown', showTools, false);
-      editor.self.addEventListener('mouseup', showTools, false);
-      editor.self.addEventListener('touchend', showTools, false);
+      editor.on('caret.up', showTools);
+      editor.on('key.down', showTools);
       blocks.addEventListener('click', hideTools, false);
       lines.addEventListener('click', hideTools, false);
     </script>

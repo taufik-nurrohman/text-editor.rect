@@ -53,6 +53,7 @@ function getRectSelection($, div, self) {
         T = toNumber(getStyle(self, props[3]), 0),
         [X, Y] = getOffset(self),
         [W, H] = getSize(self);
+    let {scrollLeft, scrollTop} = self;
     setAttribute(div, 'style', styles);
     setStyles(div, {
         'border-style': 'solid',
@@ -78,18 +79,18 @@ function getRectSelection($, div, self) {
     return [{
         h: startSize[1], // Caret height (must be the font size)
         w: 0, // Caret width is always zero
-        x: startOffset[0] + X + L, // Left offset of selection start
-        y: startOffset[1] + Y + T // Top offset of selection start
+        x: startOffset[0] + X + L - scrollLeft, // Left offset of selection start
+        y: startOffset[1] + Y + T - scrollTop // Top offset of selection start
     }, {
         h: endSize[1], // Caret height (must be the font size)
         w: 0, // Caret width is always zero
-        x: endOffset[0] + X + L, // Left offset of selection end
-        y: endOffset[1] + Y + T // Top offset of selection end
+        x: endOffset[0] + X + L - scrollLeft, // Left offset of selection end
+        y: endOffset[1] + Y + T - scrollTop // Top offset of selection end
     }, {
         h: rectSize[1], // Total selection height
         w: rectSize[0], // Total selection width
-        x: rectOffset[0] + X + L, // Left offset of the whole selection
-        y: rectOffset[1] + Y + T // Top offset of the whole selection
+        x: rectOffset[0] + X + L - scrollLeft, // Left offset of the whole selection
+        y: rectOffset[1] + Y + T - scrollTop // Top offset of the whole selection
     }, {
         h: H, // Text area height
         w: W, // Text area width
@@ -111,6 +112,7 @@ export default function Rect(self) {
             r[3][key]
         ] : r;
     });
+    return $;
 }
 
 Object.defineProperty(Rect, 'name', {

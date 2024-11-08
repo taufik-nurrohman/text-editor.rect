@@ -253,6 +253,8 @@
             _getSize = getSize(self),
             W = _getSize[0],
             H = _getSize[1];
+        var scrollLeft = self.scrollLeft,
+            scrollTop = self.scrollTop;
         setAttribute(div, 'style', styles);
         setStyles(div, {
             'border-style': 'solid',
@@ -280,25 +282,25 @@
             // Caret height (must be the font size)
             w: 0,
             // Caret width is always zero
-            x: startOffset[0] + X + L,
+            x: startOffset[0] + X + L - scrollLeft,
             // Left offset of selection start
-            y: startOffset[1] + Y + T // Top offset of selection start
+            y: startOffset[1] + Y + T - scrollTop // Top offset of selection start
         }, {
             h: endSize[1],
             // Caret height (must be the font size)
             w: 0,
             // Caret width is always zero
-            x: endOffset[0] + X + L,
+            x: endOffset[0] + X + L - scrollLeft,
             // Left offset of selection end
-            y: endOffset[1] + Y + T // Top offset of selection end
+            y: endOffset[1] + Y + T - scrollTop // Top offset of selection end
         }, {
             h: rectSize[1],
             // Total selection height
             w: rectSize[0],
             // Total selection width
-            x: rectOffset[0] + X + L,
+            x: rectOffset[0] + X + L - scrollLeft,
             // Left offset of the whole selection
-            y: rectOffset[1] + Y + T // Top offset of the whole selection
+            y: rectOffset[1] + Y + T - scrollTop // Top offset of the whole selection
         }, {
             h: H,
             // Text area height
@@ -319,6 +321,7 @@
                 r = getRectSelection($.$(), $.mirror, $.self);
             return isSet(key) ? [r[0][key], r[1][key], r[2][key], r[3][key]] : r;
         });
+        return $;
     }
     Object.defineProperty(Rect, 'name', {
         value: 'TextEditor.Rect'
