@@ -314,7 +314,7 @@
 
     function Rect(self) {
         var $ = this;
-        var $$ = $.constructor.prototype;
+        var $$ = $.constructor._;
         $.mirror = setElement('div');
         !isFunction($$.rect) && ($$.rect = function (key) {
             var $ = this,

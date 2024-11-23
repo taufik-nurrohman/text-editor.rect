@@ -101,7 +101,7 @@ function getRectSelection($, div, self) {
 
 export default function Rect(self) {
     const $ = this;
-    const $$ = $.constructor.prototype;
+    const $$ = $.constructor._;
     $.mirror = setElement('div');
     !isFunction($$.rect) && ($$.rect = function (key) {
         let $ = this, r = getRectSelection($.$(), $.mirror, $.self);
